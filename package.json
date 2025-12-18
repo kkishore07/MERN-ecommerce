@@ -1,0 +1,13 @@
+{
+  "name": "ecommerce-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start:backend": "cd express-proj && npm start",
+    "start:frontend": "cd ecom-react && npm run dev",
+    "start": "powershell -NoProfile -Command \"Start-Job -ScriptBlock { cd 'express-proj'; npm start }; cd 'ecom-react'; npm run dev\""
+  },
+  "dependencies": {
+    "react-toastify": "^11.0.5"
+  }
+}
