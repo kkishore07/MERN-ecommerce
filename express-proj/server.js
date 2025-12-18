@@ -28,8 +28,11 @@ app.get("/profile", auth, (req, res) => {
 });
 
 const connectDB = require("./config/db");
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0";
+
 connectDB().then(() => {
-  app.listen(3000, () => {
-    console.log("Server is running on http://localhost:3000");
+  app.listen(PORT, HOST, () => {
+    console.log(`Server is running on http://${HOST}:${PORT}`);
   });
 });
