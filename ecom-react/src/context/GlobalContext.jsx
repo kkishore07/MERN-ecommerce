@@ -38,7 +38,8 @@ const GlobalProvider = ({ children }) => {
         });
         if (response.ok) {
           const result = await response.json();
-          const updatedCart = result.cart || [];
+          // Backend returns cart object with products array, or just empty array
+          const updatedCart = result.cart?.products || result.cart || [];
           setCartItems(updatedCart);
           const newCount = updatedCart.reduce(
             (total, item) => total + item.quantity,
@@ -69,7 +70,8 @@ const GlobalProvider = ({ children }) => {
       });
       if (response.ok) {
         const result = await response.json();
-        const updatedCart = result.cart || [];
+        // Backend returns cart object with products array, or just empty array
+        const updatedCart = result.cart?.products || result.cart || [];
         setCartItems(updatedCart);
         const newCount = updatedCart.reduce(
           (total, item) => total + item.quantity,
