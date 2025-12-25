@@ -5,9 +5,23 @@ const fs = require("fs");
 const app = express();
 app.use(express.json());
 
-// Configure CORS for production
+// Configure CORS for production - allow multiple origins
+const allowedOrigins = [
+  "https://ecommerce-rust-chi-61.vercel.app",
+  "http://localhost:5173",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "https://ecommerce-rust-chi-61.vercel.app",
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all origins for now to debug
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
