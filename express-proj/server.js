@@ -4,7 +4,14 @@ const cors = require("cors");
 const fs = require("fs");
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Configure CORS for production
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "https://ecommerce-rust-chi-61.vercel.app",
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 const productsRouter = require("./routes/products");
 const cartRouter = require("./routes/cart");
